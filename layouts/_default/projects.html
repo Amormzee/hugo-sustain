@@ -3,16 +3,16 @@
     <h3>{{ .Site.Data.projects.name }}</h3>
     <div class="panel panel-default">
       <div class="panel-body">
-      {{ range $i, $el := .Site.Data.projects.source }}
-        {{ if $el.published }}
-          <h5>
-            
-            <img src="../portfolio_images/{{ $el.cover_image }}" width="128px" />
-            <i class="{{ .icon }}"></i>&nbsp;&nbsp;
-            <strong><a href="#">{{ $el.title }}</a></strong>&nbsp;-&nbsp;{{ $el.description }}
-          </h5>
+        {{ $data := .Site.Data.projects.source }}
+        {{ range $i, $el := sort $data "date" "desc" }}
+          {{ if $el.published }}
+            <h5>
+              <img src="../portfolio_images/{{ $el.cover_image }}" width="128px" />
+              <i class="{{ .icon }}"></i>&nbsp;&nbsp;
+              <strong><a href="#">{{ $el.title }}</a></strong>&nbsp;-&nbsp;{{ $el.description }}
+            </h5>
+          {{ end }}
         {{ end }}
-      {{ end }}
       </div>
     </div>
   </div>
